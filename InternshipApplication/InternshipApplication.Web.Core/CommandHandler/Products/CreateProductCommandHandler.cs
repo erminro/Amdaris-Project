@@ -1,4 +1,5 @@
-﻿using InernshipApplication.Web.Domain;
+﻿using AutoMapper;
+using InernshipApplication.Web.Domain;
 using InternshipApplication.Web.Core.Commands;
 using InternshipApplication.Web.Core.Commands.Products;
 using InternshipApplication.Web.Core.Interfaces;
@@ -11,20 +12,17 @@ namespace InternshipApplication.Web.Core.CommandHandler.Products
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CreateProductCommandHandler(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+        public CreateProductCommandHandler(IMapper mapper, IUnitOfWork unitOfWork)
         {
+            _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
         public async Task<Unit> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            Product product=new Product();
-            product.Name=request.ProductDto.Name;
-            product.Description=request.ProductDto.Description;
-            product.Price=request.ProductDto.Price;
-            product.CompanyName=request.ProductDto.CompanyName;
-            product.ImagePath=request.ProductDto.ImagePath;
-            product.Id = new System.Guid();
-            _unitOfWork.ProductRepository.Add(product);
+            var mappreRes = _mapper.Map<Product>(request.NewProductDto);
+            mappreRes.Id = new System.Guid();
+            _unitOfWork.ProductRepository.Add(mappreRes);
             await _unitOfWork.SaveChangesAsync();
             return Unit.Value;
         }

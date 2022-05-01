@@ -14,6 +14,8 @@ namespace InternshipApplication.Web.Core.Dto.Profiles
         {
             CreateMap<User,UserDto>();
             CreateMap<User,NewUserDto>();
+            CreateMap<NewUserDto, User>();
+            CreateMap<UserDto, User>();
         }
     }
 }

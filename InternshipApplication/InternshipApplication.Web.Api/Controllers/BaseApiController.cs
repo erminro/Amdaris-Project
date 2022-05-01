@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InternshipApplication.Web.Api.Controllers
@@ -9,6 +10,8 @@ namespace InternshipApplication.Web.Api.Controllers
     public class BaseApiController : ControllerBase
     {
         private IMediator _mediator;
+        private IMapper _mapper;
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+        protected IMapper Mapper => _mapper ??= HttpContext.RequestServices.GetService<IMapper>();
     }
 }

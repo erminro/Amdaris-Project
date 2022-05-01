@@ -25,7 +25,7 @@ namespace InternshipApplication.Web.Api.Controllers
         public async Task<IActionResult> CreateCategory([FromBody] NewCategoryDto categoryDto)
         {
 
-            var result = await Mediator.Send(new CreateCategoryCommand { CategoryDto = categoryDto });
+            var result = await Mediator.Send(new CreateCategoryCommand { NewCategoryDto = categoryDto });
             return Ok(result);
         }
         [Route("{userId}")]

@@ -6,7 +6,7 @@ namespace InternshipApplication.Web.Core.Commands.Products
 {
     public class CreateProductCommand : IRequest
     {
-        public NewProductDto ProductDto { get; set; }
+        public NewProductDto NewProductDto { get; set; }
 
     }
 }

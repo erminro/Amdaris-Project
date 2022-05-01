@@ -6,7 +6,7 @@ namespace InternshipApplication.Web.Core.Commands.Users
 {
     public class CreateUserCommand : IRequest
     {
-        public NewUserDto UserDto { get; set; }
+        public NewUserDto NewUserDto { get; set; }
 
     }
 }

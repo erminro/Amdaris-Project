@@ -765,6 +765,9 @@
       "InernshipApplication.Web.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.3"
+        },
         "compile": {
           "bin/placeholder/InernshipApplication.Web.Domain.dll": {}
         },
@@ -2239,6 +2242,8 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "AutoMapper >= 11.0.1",
+      "AutoMapper.Extensions.Microsoft.DependencyInjection >= 11.0.0",
       "InternshipApplication.Web.Core >= 1.0.0",
       "InternshipApplication.Web.Infrastructure >= 1.0.0",
       "MediatR >= 10.0.1",
@@ -2301,6 +2306,14 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[11.0.1, )"
+          },
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "[11.0.0, )"
+          },
           "MediatR": {
             "target": "Package",
             "version": "[10.0.1, )"

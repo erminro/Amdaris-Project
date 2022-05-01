@@ -25,7 +25,7 @@ namespace InternshipApplication.Web.Api.Controllers
         public async Task<IActionResult> CreateProduct([FromBody]NewProductDto product)
         {
 
-            var result = await Mediator.Send(new CreateProductCommand { ProductDto = product });
+            var result = await Mediator.Send(new CreateProductCommand { NewProductDto = product });
             return Ok(result);
         }
         [Route("{productId}")]

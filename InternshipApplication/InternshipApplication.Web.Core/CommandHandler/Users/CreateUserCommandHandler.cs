@@ -1,4 +1,5 @@
-﻿using InernshipApplication.Web.Domain;
+﻿using AutoMapper;
+using InernshipApplication.Web.Domain;
 using InternshipApplication.Web.Core.Commands.Users;
 using InternshipApplication.Web.Core.Interfaces;
 using MediatR;
@@ -10,18 +11,17 @@ namespace InternshipApplication.Web.Core.CommandHandler.Users
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CreateUserCommandHandler(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+        public CreateUserCommandHandler(IMapper mapper, IUnitOfWork unitOfWork)
         {
+            _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
         public async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            User user=new User();
-            user.Name = request.UserDto.Name;
-            user.Email = request.UserDto.Email;
-            user.Surname = request.UserDto.Surname;
-            user.Id=new System.Guid();
-            _unitOfWork.UserRepository.Add(user);
+            var mappedres = _mapper.Map<User>(request.NewUserDto);
+            mappedres.Id = new System.Guid();
+            _unitOfWork.UserRepository.Add(mappedres);
             await _unitOfWork.SaveChangesAsync();
             return Unit.Value;
         }

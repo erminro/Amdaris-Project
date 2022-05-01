@@ -6,7 +6,7 @@ namespace InternshipApplication.Web.Core.Commands.Categories
 {
     public class CreateCategoryCommand : IRequest
     {
-        public NewCategoryDto CategoryDto{ get; set; }
+        public NewCategoryDto NewCategoryDto{ get; set; }
 
     }
 }

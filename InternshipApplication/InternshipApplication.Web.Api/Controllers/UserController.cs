@@ -23,7 +23,7 @@ namespace InternshipApplication.Web.Api.Controllers
         public async Task<IActionResult> CreateUser([FromBody]NewUserDto userDto)
         {
 
-            var result = await Mediator.Send(new CreateUserCommand { UserDto = userDto });
+            var result = await Mediator.Send(new CreateUserCommand { NewUserDto = userDto });
             return Ok(result);
         }
         [Route("{userId}")]

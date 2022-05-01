@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InternshipApplication.Web.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220403202450_CreateDatabase2")]
-    partial class CreateDatabase2
+    [Migration("20220426102955_DataBase")]
+    partial class DataBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,21 @@ namespace InternshipApplication.Web.Infrastructure.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("CategoryProduct", b =>
+                {
+                    b.Property<Guid>("CategoriesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ProductsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("CategoriesId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("CategoryProduct");
+                });
+
             modelBuilder.Entity("InernshipApplication.Web.Domain.Category", b =>
                 {
                     b.Property<Guid>("Id")
@@ -33,12 +48,7 @@ namespace InternshipApplication.Web.Infrastructure.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("Productid")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("Productid");
 
                     b.ToTable("Categories");
                 });
@@ -55,13 +65,14 @@ namespace InternshipApplication.Web.Infrastructure.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImagePaths")
+                    b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -116,11 +127,17 @@ namespace InternshipApplication.Web.Infrastructure.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("InernshipApplication.Web.Domain.Category", b =>
+            modelBuilder.Entity("CategoryProduct", b =>
                 {
+                    b.HasOne("InernshipApplication.Web.Domain.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("InernshipApplication.Web.Domain.Product", null)
-                        .WithMany("Categories")
-                        .HasForeignKey("Productid")
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -146,8 +163,6 @@ namespace InternshipApplication.Web.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("InernshipApplication.Web.Domain.Product", b =>
                 {
-                    b.Navigation("Categories");
-
                     b.Navigation("Reviews");
                 });
 

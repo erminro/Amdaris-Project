@@ -694,6 +694,9 @@
       "InernshipApplication.Web.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.3"
+        },
         "compile": {
           "bin/placeholder/InernshipApplication.Web.Domain.dll": {}
         },

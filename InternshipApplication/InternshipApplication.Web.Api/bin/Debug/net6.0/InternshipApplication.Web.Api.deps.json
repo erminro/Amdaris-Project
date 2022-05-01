@@ -8,6 +8,8 @@
     ".NETCoreApp,Version=v6.0": {
       "InternshipApplication.Web.Api/1.0.0": {
         "dependencies": {
+          "AutoMapper": "11.0.1",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "11.0.0",
           "InternshipApplication.Web.Core": "1.0.0",
           "InternshipApplication.Web.Infrastructure": "1.0.0",
           "MediatR": "10.0.1",
@@ -539,6 +541,9 @@
         }
       },
       "InernshipApplication.Web.Domain/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.3"
+        },
         "runtime": {
           "InernshipApplication.Web.Domain.dll": {}
         }
